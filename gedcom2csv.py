@@ -85,8 +85,6 @@ for element in root_child_elements:
 
         death_data = element.get_death_data()
 
-        print(death_data)
-
         row.append(formatGedcomDate(death_data[0]))
         if death_data[1] and death_data[1].strip():
             row.append(format("\"%s\"" % death_data[1]))
@@ -99,8 +97,6 @@ for element in root_child_elements:
             row.append(format("\"%s\"" % titles_str))
         else:
             row.append('')
-
-        print(row)
 
         outfile_contents.append(','.join(row))
 
