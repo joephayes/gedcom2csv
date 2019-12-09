@@ -28,6 +28,18 @@ def formatGedcomDate(date_string):
             .replace('nov', 'Nov')
             .replace('dec', 'Dec'))
 
+def get_titles(element):
+    titles = []
+
+    if not element.is_individual():
+        return titles
+
+    for child in element.get_child_elements():
+        if child.get_tag() == 'NOBI':
+            titles.append(child.get_value())
+
+    return titles
+
 try: infile_path = sys.argv[1]
 except IndexError: sys.exit("No gedcom defined!")
 
@@ -41,7 +53,7 @@ root_child_elements = gedcom_parser.get_root_child_elements()
 
 outfile_contents = []
 
-outfile_contents.append(','.join(["id", "name", "gender", "birth date", "birth place", "death date", "place of death"]))
+outfile_contents.append(','.join(["id", "name", "gender", "birth date", "birth place", "death date", "place of death", "title"]))
 
 for element in root_child_elements:
 
@@ -66,12 +78,29 @@ for element in root_child_elements:
         birth_data = element.get_birth_data()
 
         row.append(formatGedcomDate(birth_data[0]))
-        row.append(birth_data[1] if print("\"%s\"" % birth_data[1]) else '')
+        if birth_data[1] and birth_data[1].strip():
+            row.append(format("\"%s\"" % birth_data[1]))
+        else:
+            row.append('')
 
         death_data = element.get_death_data()
 
+        print(death_data)
+
         row.append(formatGedcomDate(death_data[0]))
-        row.append(death_data[1] if print("\"%s\"" % death_data[1]) else '')
+        if death_data[1] and death_data[1].strip():
+            row.append(format("\"%s\"" % death_data[1]))
+        else:
+            row.append('')
+
+        titles = get_titles(element)
+        titles_str = ','.join(filter(None, titles))
+        if titles_str and titles_str.strip():
+            row.append(format("\"%s\"" % titles_str))
+        else:
+            row.append('')
+
+        print(row)
 
         outfile_contents.append(','.join(row))
 
