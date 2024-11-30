@@ -47,7 +47,7 @@ class Gedcom2CSV:
         return titles
 
     def convert_to_csv(self, gedcom_file: str) -> str:
-        logger.info(f"Converting GEDCOM file {gedcom_file} into a CSV graph")
+        logger.info(f"Converting GEDCOM file {gedcom_file} into a CSV file")
 
         self.gedcom_parser.parse_file(gedcom_file)
 
