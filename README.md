@@ -28,6 +28,6 @@ see [tests](gedcom2csv/tests/README.md)
 
 Run GEDCOM to csv converter script
 
-    ```bash
-    $ ./scripts/gedcom2csv.sh ./data/myfamily.ged ./output/myfamily.csv
-    ```
+```bash
+$ ./scripts/gedcom2csv.sh ./data/myfamily.ged ./output/myfamily.csv
+```
