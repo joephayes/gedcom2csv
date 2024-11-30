@@ -1,0 +1,45 @@
+name: run tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      pytest-arguments:
+        description: "pytest arguments (https://docs.pytest.org/en/latest/how-to/usage.html)"
+        default: -s -vvvv
+        required: false
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python: ["3.12"]
+
+    steps:
+
+     - name: checkout
+       uses: actions/checkout@v4
+
+     - name: setup python
+       uses: actions/setup-python@v5
+       with:
+         python-version: ${{ matrix.python }}
+
+     - name: install tox
+       run: pip install tox
+
+     - name: process pytest arguments
+       if: "${{ github.event.inputs.pytest-arguments != '' }}"
+       run: |
+         echo "PYTEST_ARGUMENTS= -- ${{ github.event.inputs.pytest-arguments}}" >> $GITHUB_ENV
+
+     - name: run tox
+       run: tox $PYTEST_ARGUMENTS
