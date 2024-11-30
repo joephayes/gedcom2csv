@@ -1,3 +1,5 @@
+import csv
+import io
 import logging
 
 from gedcom.element.individual import IndividualElement
@@ -9,6 +11,17 @@ logger = logging.getLogger(__name__)
 class Gedcom2CSV:
     def __init__(self):
         self.gedcom_parser = Parser()
+        self.fieldnames = [
+            "id",
+            "name",
+            "name variations",
+            "gender",
+            "birth date",
+            "birth place",
+            "death date",
+            "place of death",
+            "title",
+        ]
 
     @staticmethod
     def _formatGedcomDate(date_string: str) -> str:
@@ -49,66 +62,56 @@ class Gedcom2CSV:
     def convert_to_csv(self, gedcom_file: str) -> str:
         logger.info(f"Converting GEDCOM file {gedcom_file} into a CSV file")
 
+        out = io.StringIO()
+
         self.gedcom_parser.parse_file(gedcom_file)
 
         root_child_elements = self.gedcom_parser.get_root_child_elements()
 
-        outfile_contents = []
-
-        outfile_contents.append(
-            ",".join(
-                [
-                    "id",
-                    "name",
-                    "gender",
-                    "birth date",
-                    "birth place",
-                    "death date",
-                    "place of death",
-                    "title",
-                ]
-            )
-        )
+        writer = csv.DictWriter(out, fieldnames=self.fieldnames, lineterminator="\n")
+        writer.writeheader()
 
         for element in root_child_elements:
             if isinstance(element, IndividualElement):
-                row = []
                 name = element.get_name()
                 if name[0] == "Unnamed":
                     continue
 
+                def process_name(name: str) -> str | None:
+                    name_elements = name.split("/")
+                    if name_elements:
+                        return " ".join(
+                            [ne.strip() for ne in filter(None, name_elements)]
+                        )
+                    return None
+
+                # alternate names are the other names attached to an individual (so we skip the first one)
+                alternate_names = [
+                    process_name(n) for n in ((element.get_all_names() or [])[1:])
+                ]
                 record_id = element.get_pointer().replace("@", "").lower()
-
-                row.append(record_id)
-                row.append(" ".join(filter(None, name)))
-
                 gender = element.get_gender()
-
-                row.append(gender)
-
                 birth_data = element.get_birth_data()
-
-                row.append(self._formatGedcomDate(birth_data[0]))
-                if birth_data[1] and birth_data[1].strip():
-                    row.append(format('"%s"' % birth_data[1]))
-                else:
-                    row.append("")
-
                 death_data = element.get_death_data()
-
-                row.append(self._formatGedcomDate(death_data[0]))
-                if death_data[1] and death_data[1].strip():
-                    row.append(format('"%s"' % death_data[1]))
-                else:
-                    row.append("")
-
                 titles = self._get_titles(element)
                 titles_str = ",".join(filter(None, titles))
-                if titles_str and titles_str.strip():
-                    row.append(format('"%s"' % titles_str))
-                else:
-                    row.append("")
 
-                outfile_contents.append(",".join(row))
+                item = {
+                    "id": record_id,
+                    "name": " ".join(filter(None, name)),
+                    "name variations": ",".join(filter(None, alternate_names or [])),
+                    "gender": gender,
+                    "birth date": self._formatGedcomDate(birth_data[0]),
+                    "birth place": birth_data[1]
+                    if birth_data[1] and birth_data[1].strip()
+                    else None,
+                    "death date": self._formatGedcomDate(death_data[0]),
+                    "place of death": death_data[1]
+                    if death_data[1] and death_data[1].strip()
+                    else None,
+                    "title": titles_str if titles_str and titles_str.strip() else None,
+                }
 
-        return "\n".join(outfile_contents)
+                writer.writerow(item)
+
+        return out.getvalue()

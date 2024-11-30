@@ -1,13 +1,13 @@
-id,name,gender,birth date,birth place,death date,place of death,title
-i1,Louis Mazzini,M,15 Mar 1910,"London, England",,,
-i2,Sibella Mazzini,F,1 May 1912,"London, England",,,
-i3,Edmund D'Ascoyne,M,25 Jun 1880,"London, England",,,"Duke of D'Ascoyne"
-i4,Constance D'Ascoyne,F,17 Dec 1883,"London, England",,,
-i5,Henry D'Ascoyne,M,19 Oct 1875,"London, England",,,
-i6,Agatha D'Ascoyne,F,22 Jul 1880,"London, England",,,
-i7,George D'Ascoyne,M,30 Jun 1878,"London, England",,,
-i8,Victoria D'Ascoyne,F,12 Mar 1882,"London, England",,,
-i9,Doreen D'Ascoyne,F,2 Sep 1885,"London, England",,,
-i10,Arthur D'Ascoyne,M,25 Sep 1888,"London, England",,,
-i11,Eleanor D'Ascoyne,F,9 Nov 1889,"London, England",,,
-i12,Albert D'Ascoyne,M,14 Jan 1872,"London, England",,,
+id,name,name variations,gender,birth date,birth place,death date,place of death,title
+i1,Louis Mazzini,,M,15 Mar 1910,"London, England",,,
+i2,Sibella Mazzini,,F,1 May 1912,"London, England",,,
+i3,Edmund D'Ascoyne,,M,25 Jun 1880,"London, England",,,Duke of D'Ascoyne
+i4,Constance D'Ascoyne,,F,17 Dec 1883,"London, England",,,
+i5,Henry D'Ascoyne,,M,19 Oct 1875,"London, England",,,
+i6,Agatha D'Ascoyne,,F,22 Jul 1880,"London, England",,,
+i7,George D'Ascoyne,,M,30 Jun 1878,"London, England",,,
+i8,Victoria D'Ascoyne,,F,12 Mar 1882,"London, England",,,
+i9,Doreen D'Ascoyne,,F,2 Sep 1885,"London, England",,,
+i10,Arthur D'Ascoyne,,M,25 Sep 1888,"London, England",,,
+i11,Eleanor D'Ascoyne,,F,9 Nov 1889,"London, England",,,
+i12,Albert D'Ascoyne,,M,14 Jan 1872,"London, England",,,
