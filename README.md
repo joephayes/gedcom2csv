@@ -26,13 +26,8 @@ see [tests](gedcom2csv/tests/README.md)
 
 ### Running
 
-1.  Get GEDCOM file
-    ```bash
-    $ aws s3 cp s3://nsp-datafiles/nsp.ged ./data
-    ```
-
-4. Run GEDCOM to csv converter script
+Run GEDCOM to csv converter script
 
     ```bash
-    $ ./scripts/gedcom2csv.sh ./data/nsp.ged ./output/nsp.csv
+    $ ./scripts/gedcom2csv.sh ./data/myfamily.ged ./output/myfamily.csv
     ```
