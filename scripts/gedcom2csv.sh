@@ -3,7 +3,7 @@
 set -e
 
 if [[ -z "$1" ]] || [[ -z "$2" ]]; then
-    echo "Usage: $(basename $0) path/to/gedcom.ged path/to/output.csv
+    echo "Usage: $(basename $0) path/to/gedcom.ged path/to/output.csv"
 fi
 
 export LOG_LEVEL=${LOG_LEVEL:-DEBUG}

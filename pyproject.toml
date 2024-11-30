@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [project.scripts]
-gedcom-tool = "gedcom_tool.main:cli"
+gedcom2csv = "gedcom2csv.main:cli"
 
 [project.optional-dependencies]
 dev = [
