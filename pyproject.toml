@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools >= 75.2.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project]
+name = "gedcom2csv"
+authors = [
+    {name = "Joe Hayes", email = "joephayes@gmail.com"}
+]
+description = "Reads a GEDCOM file and outputs basic information about individuals in CSV format"
+version = "0.0.1"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "click==8.1.7",
+    "python-gedcom@git+https://github.com/joeyaurel/python-gedcom#egg=master"
+]
+
+[project.scripts]
+gedcom-tool = "gedcom_tool.main:cli"
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit==4.0.1",
+    "ruff==0.7.2",
+    "pytest==8.3.3",
+    "pytest-cov==6.0.0",
+    "tox==4.23.2",
+    "mypy==1.13.0"
+]
+
+[tool.tox]
+requires = ["tox>=4.21"]
+env_list = ["3.12", "type"]
+
+[tool.tox.env_run_base]
+deps = "{[project.optional-dependencies]dev}"
+commands = [["pytest", "-s", "--cov", "gedcom2csv", "--cov-report", "term", "--cov-report", "html", "{posargs:tests}"]]
+
+[tool.tox.env.type]
+deps = "{[project.optional-dependencies]type}"
+commands = [["mypy", "--install-types", "--non-interactive", "--disable-error-code=import-untyped", "src"]]
+
+
+[tool.ruff.lint]
+select = [
+    "E4",  # default
+    "E7",
+    "E9",
+    "F",
+    "B",   # bugbear
+    "I",    # isort
+    "C901" # mccabe
+]
+# Avoid trying to fix flake8-bugbear (`B`) violations.
+unfixable = ["B"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+ignore_errors = true
+fail_under = 60
+
+[tool.coverage.html]
+directory = "coverage_report_html"
+
+
+[tool.mypy]
+namespace_packages = true

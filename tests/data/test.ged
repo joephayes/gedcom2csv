@@ -1,0 +1,116 @@
+0 HEAD
+1 SOUR ChatGPT
+1 GEDC
+2 VERS 5.5
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Louis /Mazzini/
+1 SEX M
+1 BIRT
+2 DATE 15 MAR 1910
+2 PLAC London, England
+1 FAMS @F1@
+1 FAMC @F2@
+0 @I2@ INDI
+1 NAME Sibella /Mazzini/
+1 SEX F
+1 BIRT
+2 DATE 1 MAY 1912
+2 PLAC London, England
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME Edmund /D'Ascoyne/
+1 SEX M
+1 BIRT
+2 DATE 25 JUN 1880
+2 PLAC London, England
+1 TITL Duke of D'Ascoyne
+1 FAMS @F2@
+0 @I4@ INDI
+1 NAME Constance /D'Ascoyne/
+1 SEX F
+1 BIRT
+2 DATE 17 DEC 1883
+2 PLAC London, England
+1 FAMS @F3@
+0 @I5@ INDI
+1 NAME Henry /D'Ascoyne/
+1 SEX M
+1 BIRT
+2 DATE 19 OCT 1875
+2 PLAC London, England
+1 FAMS @F4@
+0 @I6@ INDI
+1 NAME Agatha /D'Ascoyne/
+1 SEX F
+1 BIRT
+2 DATE 22 JUL 1880
+2 PLAC London, England
+1 FAMS @F5@
+0 @I7@ INDI
+1 NAME George /D'Ascoyne/
+1 SEX M
+1 BIRT
+2 DATE 30 JUN 1878
+2 PLAC London, England
+1 FAMS @F6@
+0 @I8@ INDI
+1 NAME Victoria /D'Ascoyne/
+1 SEX F
+1 BIRT
+2 DATE 12 MAR 1882
+2 PLAC London, England
+1 FAMS @F7@
+0 @I9@ INDI
+1 NAME Doreen /D'Ascoyne/
+1 SEX F
+1 BIRT
+2 DATE 2 SEP 1885
+2 PLAC London, England
+1 FAMS @F8@
+0 @I10@ INDI
+1 NAME Arthur /D'Ascoyne/
+1 SEX M
+1 BIRT
+2 DATE 25 SEP 1888
+2 PLAC London, England
+1 FAMS @F9@
+0 @I11@ INDI
+1 NAME Eleanor /D'Ascoyne/
+1 SEX F
+1 BIRT
+2 DATE 9 NOV 1889
+2 PLAC London, England
+1 FAMS @F10@
+0 @I12@ INDI
+1 NAME Albert /D'Ascoyne/
+1 SEX M
+1 BIRT
+2 DATE 14 JAN 1872
+2 PLAC London, England
+1 FAMS @F11@
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I1@
+0 @F2@ FAM
+1 HUSB @I3@
+1 WIFE @I4@
+1 CHIL @I1@
+0 @F3@ FAM
+1 HUSB @I5@
+1 WIFE @I6@
+1 CHIL @I2@
+0 @F4@ FAM
+1 HUSB @I7@
+1 WIFE @I8@
+1 CHIL @I2@
+0 @F5@ FAM
+1 HUSB @I9@
+1 WIFE @I10@
+1 CHIL @I2@
+0 @F6@ FAM
+1 HUSB @I11@
+1 WIFE @I12@
+1 CHIL @I2@
+0 TRLR
