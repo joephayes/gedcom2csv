@@ -2,6 +2,7 @@ import csv
 import io
 import logging
 
+from gedcom.element.element import Element
 from gedcom.element.individual import IndividualElement
 from gedcom.parser import Parser
 
@@ -50,12 +51,14 @@ class Gedcom2CSV:
         )
 
     @staticmethod
-    def _get_titles(element: IndividualElement) -> list[str]:
+    def _get_titles(element: Element) -> list[str]:
         titles = []
 
         for child in element.get_child_elements() or []:
             if child.get_tag() in ["NOBI", "NPFX", "TITL"]:
                 titles.append(child.get_value())
+            else:
+                titles = [*titles, *Gedcom2CSV._get_titles(child)]
 
         return titles
 
@@ -94,7 +97,7 @@ class Gedcom2CSV:
                 birth_data = element.get_birth_data()
                 death_data = element.get_death_data()
                 titles = self._get_titles(element)
-                titles_str = ",".join(filter(None, titles))
+                titles_str = ",".join(filter(None, set(titles)))
 
                 item = {
                     "id": record_id,
